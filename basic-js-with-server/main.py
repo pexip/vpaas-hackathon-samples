@@ -16,7 +16,7 @@ def read_root():
 
 @app.post("/api/v1/create")
 async def create_meeting():
-    return await make_authorized_request("/")
+    return await make_authorized_request("")
 
 @app.post("/api/v1/meetings/{meeting_id}/participants")
 async def add_participant(meeting_id: str, q: Union[str, None] = None):
