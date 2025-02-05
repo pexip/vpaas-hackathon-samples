@@ -1,0 +1,42 @@
+.Meeting {
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .PipContainer {
+    position: absolute;
+    top: 2em;
+    right: 2em;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 1em;
+    height: 10em !important;
+    z-index: 1;
+
+    > div {
+      height: 100%;
+    }
+
+    .SelfView video {
+      object-fit: cover;
+    }
+
+    .PresentationSelfView {
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+
+      video {
+        object-fit: contain;
+      }
+    }
+  }
+
+  video {
+    aspect-ratio: 16/9;
+  }
+
+  .NoParticipants {
+    margin: auto;
+    color: white;
+  }
+}

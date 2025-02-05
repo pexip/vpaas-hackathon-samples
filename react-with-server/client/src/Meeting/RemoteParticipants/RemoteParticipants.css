@@ -1,0 +1,40 @@
+.RemoteParticipants {
+  max-width: 124vh;
+  max-height: 100%;
+  margin: auto !important;
+  overflow: auto;
+  justify-content: center;
+
+  .Cell {
+    max-width: 100%;
+    height: 100%;
+    padding: 0.5em;
+    padding-top: 0;
+    line-height: 0;
+
+    .NoStreamContainer {
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      aspect-ratio: 4 / 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .ParticipantIcon {
+        color: white;
+        width: 4em;
+        height: 4em;
+      }
+    }
+
+    video {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.2);
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+  }
+}
