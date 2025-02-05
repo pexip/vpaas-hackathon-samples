@@ -13,7 +13,7 @@ Modify if needed the configuration file located in `client/public/config.json`:
 
 ```json
 {
-  "server": "https://localhost:3000"
+  "server": "http://localhost:3000"
 }
 ```
 
@@ -21,4 +21,4 @@ Modify if needed the configuration file located in `client/public/config.json`:
 
 Before testing the client, we will need to run the server and the client in
 development mode. Once we have done that, we will be able to access the client
-from the URL [https://localhost:4000](https://localhost:4000).
+from the URL [http://localhost:4000](http://localhost:4000).

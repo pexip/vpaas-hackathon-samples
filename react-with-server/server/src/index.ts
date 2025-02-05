@@ -2,7 +2,6 @@ import express, { type RequestHandler } from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import fs from 'fs'
-import https from 'https'
 import config from 'config'
 import { v4 as uuidv4 } from 'uuid'
 import jwt from 'jsonwebtoken'
@@ -53,7 +52,7 @@ const api = withToken(createJwt, config.get('vpaas.apiAddress'))(createApi())
 
 app.use(
   cors({
-    origin: 'https://localhost:4000'
+    origin: 'http://localhost:4000'
   })
 )
 
@@ -87,14 +86,8 @@ app.post('/meetings/:meetingId/participants', (async (req, res) => {
   }
 }) as RequestHandler)
 
-const options = {
-  key: fs.readFileSync('dev-certs/key.pem'),
-  cert: fs.readFileSync('dev-certs/cert.pem')
-}
-const server = https.createServer(options, app)
-
-server.listen(port, () => {
+app.listen(port, () => {
   console.log(
-    `VPaaS server listening on port ${port}: https://localhost:${port}`
+    `VPaaS server listening on port ${port}: http://localhost:${port}`
   )
 })

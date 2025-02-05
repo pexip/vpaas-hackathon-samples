@@ -14,7 +14,7 @@ Create configuration file in the path `server/config/default.json`:
 ```json
 {
   "vpaas": {
-    "address": "https://crud.pexip.rocks",
+    "apiAddress": "https://crud.pexip.rocks",
     "credentials": {
       "clientId": "",
       "privateKeyPath": "./config/credentials/privateKey.pem"
