@@ -7,7 +7,8 @@ import { v4 as uuidv4 } from 'uuid'
 import jwt from 'jsonwebtoken'
 import { createApi, withToken } from '@pexip/vpaas-api'
 
-const port: string = config.get('server.port')
+const host: string = config.get('server.host')
+const port: number = config.get('server.port')
 
 const app = express()
 app.use(helmet())
@@ -52,7 +53,7 @@ const api = withToken(createJwt, config.get('vpaas.apiAddress'))(createApi())
 
 app.use(
   cors({
-    origin: 'http://localhost:4000'
+    origin: 'http://127.0.0.1:4000'
   })
 )
 
@@ -86,8 +87,8 @@ app.post('/meetings/:meetingId/participants', (async (req, res) => {
   }
 }) as RequestHandler)
 
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(
-    `VPaaS server listening on port ${port}: http://localhost:${port}`
+    `VPaaS server listening on port ${port}: http://127.0.0.1:${port}`
   )
 })

@@ -21,6 +21,7 @@ Create configuration file in the path `server/config/default.json`:
     }
   },
   "server": {
+    "host": "127.0.0.1",
     "port": 3000
   }
 }
@@ -33,17 +34,17 @@ We can test the server using cURL:
 - Get the API address:
 
   ```bash
-  $ curl https://localhost:3000/api-address --insecure
+  $ curl https://127.0.0.1:3000/api-address --insecure
   ```
 
 - Create a meeting:
 
   ```bash
-  $ curl -X POST https://localhost:3000/meetings --insecure
+  $ curl -X POST https://127.0.0.1:3000/meetings --insecure
   ```
 
 - Create a participant for the previous meeting:
 
   ```bash
-  $ curl -X POST https://localhost:3000/meetings/<meetingId>/participants --insecure
+  $ curl -X POST https://127.0.0.1:3000/meetings/<meetingId>/participants --insecure
   ```
