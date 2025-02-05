@@ -1,0 +1,12 @@
+{
+  "vpaas": {
+    "apiAddress": "https://crud.pexip.rocks",
+    "credentials": {
+      "clientId": "",
+      "privateKeyPath": "./config/credentials/privateKey.pem"
+    }
+  },
+  "server": {
+    "port": 3000
+  }
+}
