@@ -55,9 +55,16 @@ async def request_auth_token(
         )
         raise AssertionError("Failed to request access token") from err
 
-async def make_authorized_request(endpoint: str, method: str = "POST", json: dict = {}) -> dict:
+
+async def make_authorized_request(
+    endpoint: str, method: str = "POST", json: dict = {}
+) -> dict:
     async with ClientSession() as session:
-        type_, token, _ = await request_auth_token(session, CLIENT_ID, CLIENT_KEY, SCOPES)
+        type_, token, _ = await request_auth_token(
+            session, CLIENT_ID, CLIENT_KEY, SCOPES
+        )
         session.headers["Authorization"] = f"{type_} {token}"
-        async with session.request(method, f"{CRUD_ADDRESS}/v1/meetings{endpoint}", json=json) as response:
+        async with session.request(
+            method, f"{CRUD_ADDRESS}/v1/meetings{endpoint}", json=json
+        ) as response:
             return await response.json()

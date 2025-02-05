@@ -6,17 +6,20 @@ from starlette.responses import FileResponse
 
 from constants import CRUD_ADDRESS
 from helpers import make_authorized_request
-        
+
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 @app.get("/")
 def read_root():
     return FileResponse("static/index.html")
 
+
 @app.post("/api/v1/create")
 async def create_meeting():
     return await make_authorized_request("")
+
 
 @app.post("/api/v1/meetings/{meeting_id}/participants")
 async def add_participant(meeting_id: str, q: Union[str, None] = None):
