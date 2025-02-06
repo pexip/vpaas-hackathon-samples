@@ -3,7 +3,7 @@
     "apiAddress": "https://crud.pexip.rocks",
     "credentials": {
       "clientId": "",
-      "privateKeyPath": "./config/credentials/privateKey.pem"
+      "privateKeyPath": "./config/privateKey.pem"
     }
   },
   "server": {
