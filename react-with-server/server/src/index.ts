@@ -53,7 +53,7 @@ const api = withToken(createJwt, config.get('vpaas.apiAddress'))(createApi())
 
 app.use(
   cors({
-    origin: 'http://127.0.0.1:4000'
+    origin: `http://${host}:4000`  // client port
   })
 )
 
