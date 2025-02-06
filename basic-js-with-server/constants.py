@@ -1,6 +1,6 @@
 import os
 
-CRUD_ADDRESS = os.environ.get("CRUD_ADDRESS")
+CRUD_ADDRESS = "https://crud.pexip.rocks"
 CLIENT_ID = os.environ.get("CLIENT_ID")
 CLIENT_KEY = os.environ.get("CLIENT_KEY")
 
