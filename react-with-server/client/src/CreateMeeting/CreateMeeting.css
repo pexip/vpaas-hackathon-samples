@@ -1,0 +1,16 @@
+.CreateMeeting {
+  width: 350px;
+
+  .BoxContainer {
+    padding: 2em;
+
+    p {
+      text-align: left;
+      margin-bottom: 2em;;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}

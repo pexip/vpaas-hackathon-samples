@@ -1,0 +1,33 @@
+{
+  "name": "pexip-tutorial-web-vpass-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "@pexip/components": "^16.15.1",
+    "@pexip/media-components": "^22.0.3",
+    "@pexip/vpaas-sdk": "^18.0.2",
+    "react": "~18.3.1",
+    "react-dom": "~18.3.1",
+    "react-router-dom": "^6.23.1"
+  },
+  "devDependencies": {
+    "@types/react": "~18.3.2",
+    "@types/react-dom": "~18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.9.0",
+    "@typescript-eslint/parser": "^7.9.0",
+    "@vitejs/plugin-basic-ssl": "^1.1.0",
+    "@vitejs/plugin-react-swc": "^3.6.0",
+    "eslint": "^8.57.0",
+    "eslint-config-love": "^48.0.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-config-prettier": "^9.1.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  }
+}

@@ -1,0 +1,24 @@
+.Settings{
+
+  div[role="dialog"] {
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      margin-bottom: 0.5em;;
+    }
+
+    > div > div {
+      width: 100%;
+    }
+  }
+
+  .EnabledHighQuality{
+    margin: 12px 0;
+  }
+
+  .ButtonBar {
+    gap: 12px;
+    margin-top: 12px;
+  }
+}
