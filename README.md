@@ -17,18 +17,25 @@ Upload the `publicKey.pem` to Discord and ask a Pexip member to onboard you. The
 
 There are three examples in this repo with increasing amount of complexity
 
-### `basic-js`
+### Client-only
+
+#### `basic-js`
 **Single file, pure HTML+JS example.**
 
 This is the most basic example we could come up with. It should hopefully be the easiest to understand how to use the
 VPaaS SDK.
 
-### `basic-js-with-server`
+### Client and Server
+
+These are closer to the way you would typically write an app that uses VPaaS; the client-server approach makes it easier
+to implement your own custom app logic and communicate between different clients.
+
+#### `basic-js-with-server`
 **Python based server with standard HTML+JS client.**
 
 Expands on the `basic-js` example by introducing a server that you run.
 
-### `react-with-server`
+#### `react-with-server`
 **NodeJS based server with npm managed client**
 
 This example is recommended for those most familiar with modern frontend tooling.
