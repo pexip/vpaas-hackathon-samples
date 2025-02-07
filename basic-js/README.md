@@ -26,3 +26,25 @@ To run this sample, you can just open the file in a web browser (e.g. `file:///h
 ## Troubleshooting
 
 If it looks like nothing is happening, there is likely an error in the JavaScript console. Use `F12` to see what is wrong
+
+#### Uncaught TypeError: "pkcs8" must be PKCS#8 formatted string
+
+Something is wrong with the `CLIENT_SECRET` variable.
+
+#### Uncaught BadRequestError: invalid_client
+
+* Something is wrong with the `CLIENT_ID`
+* The `CLIENT_SECRET` being used isn't matched with the `CLIENT_ID`
+* The `CLIENT_SECRET`/`CLIENT_ID` are being used with the wrong `CRUD_ADDRESS`
+
+#### Uncaught DOMException: The request is not allowed by the user agent or the platform in the current context
+
+Check browser has camera/microphone permissions
+
+#### Uncaught NotFoundError: Meeting not found
+
+The meeting you requested to join does not exist. Remove the `?id=` parameter from the URL to create a new meeting.
+
+#### Uncaught GoneError: Meeting is in the wrong state to be joined
+
+The meeting you requested to join has ended. Remove the `?id=` parameter from the URL to create a new meeting.
