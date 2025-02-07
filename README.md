@@ -7,11 +7,13 @@ used as production ready code.
 
 To be onboarded onto VPaaS, you must first generate a public/private key pair
 
-```commandline
-openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out privateKey.pem -outpubkey publicKey.pem
+```
+openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out privateKey.pem
+openssl pkey -in privateKey.pem -pubout > publicKey.pem
 ```
 
-Upload the `publicKey.pem` to Discord and ask a Pexip member to onboard you. They will give you back a `clientId`
+Upload the `publicKey.pem` to Discord and ask a Pexip member to onboard you.
+They will give you back a `clientId` which you can use with your `privateKey.pem`.
 
 ## Samples
 

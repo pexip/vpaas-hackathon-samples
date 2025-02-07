@@ -1,21 +1,26 @@
 import time
+from dataclasses import dataclass
 from uuid import uuid1
 
 from aiohttp import ClientSession, ClientResponseError
 from authlib.jose import jwt
+from fastapi import HTTPException
 
 from constants import CRUD_ADDRESS, CLIENT_ID, CLIENT_KEY, SCOPES
 from logger import LOGGER
 
 
+@dataclass
+class AuthToken:
+    token_type: str
+    access_token: str
+    expires_in: int
+
+
 async def request_auth_token(
     session: ClientSession, client_id: str, client_key: str, scopes: frozenset[str]
-) -> tuple[str, str, int]:
-    """
-    Request an auth token
-
-    returns a 3-tuple of (type, token, lifetime (seconds))
-    """
+) -> AuthToken:
+    """Request an auth token"""
     now = time.time()
     claims = {
         "iss": client_id,
@@ -37,34 +42,40 @@ async def request_auth_token(
         "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
     }
     LOGGER.debug("Requesting JWT", extra={"claims": claims})
+    body = None
     try:
         async with session.post(f"{CRUD_ADDRESS}/oauth/token", data=data) as response:
             body = await response.json()
-        return body["token_type"], body["access_token"], body["expires_in"]
+        response.raise_for_status()
+        return AuthToken(body["token_type"], body["access_token"], body["expires_in"])
     except ClientResponseError as err:
-        request_id = None
-        if err.headers:
-            request_id = err.headers.get("X-Request-ID")
+        request_id = err.headers.get("X-Request-ID") if err.headers else None
         LOGGER.error(
-            "Failed to request access token",
-            extra={
-                "status": err.status,
-                "response": err.message,
-                "request_id": request_id,
-            },
+            "Failed to request access token. Status=%s. Response=%s. Body=%s, RequestID=%s",
+            err.status,
+            err.message,
+            body,
+            request_id,
         )
-        raise AssertionError("Failed to request access token") from err
+        raise HTTPException(status_code=err.status, detail=body, headers={"X-Request-ID": request_id})
 
 
 async def make_authorized_request(
     endpoint: str, method: str = "POST", json: dict | None = None
 ) -> dict:
     async with ClientSession() as session:
-        type_, token, _ = await request_auth_token(
-            session, CLIENT_ID, CLIENT_KEY, SCOPES
+        auth_token = await request_auth_token(session, CLIENT_ID, CLIENT_KEY, SCOPES)
+        session.headers["Authorization"] = (
+            f"{auth_token.token_type} {auth_token.access_token}"
         )
-        session.headers["Authorization"] = f"{type_} {token}"
         async with session.request(
             method, f"{CRUD_ADDRESS}/v1/meetings{endpoint}", json=json or {}
         ) as response:
-            return await response.json()
+            body = await response.json()
+            request_id = response.headers.get("X-Request-ID")
+            if response.ok:
+                LOGGER.info("Success. Body=%s. RequestID=%s", body, request_id)
+                return body
+            else:
+                LOGGER.error("Failure. Body=%s. RequestID=%s", body, request_id)
+                raise HTTPException(status_code=response.status, detail=body, headers={"X-Request-ID": request_id})

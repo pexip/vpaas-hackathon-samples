@@ -91,7 +91,7 @@ vpaasSignals.onRemoteStreams.add((transceiverConfig) => {
   el.play();
 });
 
-// Subcribe to the roster updates
+// Subscribe to the roster updates
 vpaasSignals.onRosterUpdate.add((pids) => {
   for (const id of REQUESTED_STREAMS.keys()) {
     const [producerId, streamId] = decodeId(id);
