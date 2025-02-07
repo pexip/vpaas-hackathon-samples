@@ -35,7 +35,7 @@ Something is wrong with the `CLIENT_SECRET` variable.
 
 * Something is wrong with the `CLIENT_ID`
 * The `CLIENT_SECRET` being used isn't matched with the `CLIENT_ID`
-* The `CLIENT_SECRET`/`CLIENT_ID` have been paired to a different `CRUD_ADDRESS`
+* The `CLIENT_SECRET`/`CLIENT_ID` are being used with the wrong `CRUD_ADDRESS`
 
 #### Uncaught DOMException: The request is not allowed by the user agent or the platform in the current context
 

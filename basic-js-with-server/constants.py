@@ -15,4 +15,4 @@ SCOPES = frozenset[str](
 )
 
 if not all((CRUD_ADDRESS, CLIENT_ID, CLIENT_KEY)):
-    raise RuntimeError("Either CRUD_ADDRESS, CLIENT_ID or CLIENT_KEY is unset")
+    raise RuntimeError("CRUD_ADDRESS, CLIENT_ID and CLIENT_KEY must all be set")

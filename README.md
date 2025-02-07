@@ -12,7 +12,7 @@ openssl genpkey -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -out privateKey.pem
 openssl pkey -in privateKey.pem -pubout > publicKey.pem
 ```
 
-Upload the `publicKey.pem` to Discord and ask a Pexip member to onboard you.
+Upload _only_ the `publicKey.pem` to Discord and ask a Pexip member to onboard you.
 They will give you back a `clientId` which you can use with your `privateKey.pem`.
 
 ## Samples
