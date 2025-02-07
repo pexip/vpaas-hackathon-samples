@@ -46,6 +46,10 @@
             // Ideally it should be kept in the server and not in the frontend
             const CLIENT_SECRET = ``;
 
+            if (!CRUD_ADDRESS || !CLIENT_ID || !CLIENT_SECRET) {
+                throw new Error('CRUD_ADDRESS, CLIENT_ID and CLIENT_SECRET must all be set');
+            }
+
             const ALGORITHM = 'RS384';
 
             // Those are the scopes you will need to create a meeting and participant
