@@ -7,7 +7,9 @@
 
 ## Running the sample
 
-To run this sample, you'll need to have [nodejs](https://nodejs.org) installed.
+To run this sample, you'll need to have [nodejs](https://nodejs.org) installed. You must be running a version of Node
+at major version _22 or below_ (e.g. v22.13.1); major version 23 is _not_ supported.
+
 
 Both the `server` and `client` need to be spun up separately, but the process is the same for both projects.
 
