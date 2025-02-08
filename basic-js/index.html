@@ -71,8 +71,9 @@
             const RECV_AUDIO_COUNT = 9;
             const RECV_VIDEO_COUNT = 9;
 
-            // This is a set to keep track of the streams you requested
-            const REQUESTED_STREAMS = new Set();
+            // This keeps track of the streams you've currently requested. The object maps the participant/stream ID of
+            // the "producer" stream to the MID of the "consumer" stream you're receiving it on.
+            const REQUESTED_STREAMS = {};
             const encodeId = (producerId, streamId) =>
                 `${producerId}-${streamId}`;
             const decodeId = id => id.split('-');
@@ -132,6 +133,7 @@
                 apiAddress: CRUD_ADDRESS,
                 meetingId,
             });
+            console.log("Our participant ID:", participant.id);
 
             // Things you would normally run on the frontend. Create instances of the sdk
             const vpaasSignals = sdk.createVpaasSignals();
@@ -199,18 +201,17 @@
             });
 
             // Subcribe to the roster updates
-            vpaasSignals.onRosterUpdate.add(pids => {
-                for (const id of REQUESTED_STREAMS.keys()) {
-                    const [producerId, streamId] = decodeId(id);
+            vpaasSignals.onRosterUpdate.add(async pids => {
+                for (const [producerStreamID, receiveMID] of Object.entries(REQUESTED_STREAMS)) {
+                    const [producerId, streamId] = decodeId(producerStreamID);
                     if (
                         producerId &&
                         streamId &&
                         !pids[producerId]?.streams[streamId]
                     ) {
-                        REQUESTED_STREAMS.delete(id);
+                        delete REQUESTED_STREAMS[producerStreamID];
                         vpaas.disconnectStream({
-                            producer_id: producerId,
-                            stream_id: streamId,
+                            receive_mid: receiveMID,
                         });
                     }
                 }
@@ -220,12 +221,14 @@
                         producer.streams,
                     )) {
                         const id = encodeId(producerId, streamId);
-                        if (!REQUESTED_STREAMS.has(id)) {
-                            REQUESTED_STREAMS.add(id);
-                            vpaas.requestStream({
+                        if (!(id in REQUESTED_STREAMS)) {
+                            console.log("Requesting stream:", id);
+                            const response = await vpaas.requestStream({
                                 producer_id: producerId,
                                 stream_id: streamId,
                             });
+                            console.log("Added receive MID", response.receive_mid, "for requested stream:", id);
+                            REQUESTED_STREAMS[id] = response.receive_mid;
                         }
                     }
                 }
