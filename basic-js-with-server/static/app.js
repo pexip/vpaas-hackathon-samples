@@ -97,10 +97,6 @@ vpaasSignals.onRosterUpdate.add((pids) => {
     const [producerId, streamId] = decodeId(id);
     if (producerId && streamId && !pids[producerId]?.streams[streamId]) {
       REQUESTED_STREAMS.delete(id);
-      vpaas.disconnectStream({
-        producer_id: producerId,
-        stream_id: streamId,
-      });
     }
   }
 

@@ -208,10 +208,6 @@
                         !pids[producerId]?.streams[streamId]
                     ) {
                         REQUESTED_STREAMS.delete(id);
-                        vpaas.disconnectStream({
-                            producer_id: producerId,
-                            stream_id: streamId,
-                        });
                     }
                 }
 
