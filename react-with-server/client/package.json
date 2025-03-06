@@ -21,13 +21,13 @@
     "@types/react-dom": "~18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.9.0",
     "@typescript-eslint/parser": "^7.9.0",
-    "@vitejs/plugin-basic-ssl": "^1.1.0",
-    "@vitejs/plugin-react-swc": "^3.6.0",
+    "@vitejs/plugin-basic-ssl": "^1.2.0",
+    "@vitejs/plugin-react-swc": "^3.8.0",
     "eslint": "^8.57.0",
     "eslint-config-love": "^48.0.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-config-prettier": "^9.1.0",
     "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "vite": "^6.2.0"
   }
 }
